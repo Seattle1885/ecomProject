@@ -1,0 +1,40 @@
+@model IEnumerable<Client.Models.Product>
+<h1>E-commerce Orders</h1>
+<h1>Welcome @ViewBag.LoginUser.FirstName @ViewBag.LoginUser.LastName</h1>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+            <a asp-action="Orders" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.ProductName)</a>
+            </th>
+            <th><a asp-action="Orders" asp-route-sortOrder="@ViewData["DateSortParm"]">Sold @@</a></th>
+            <th>Description</th>
+        </tr>
+    </thead>
+@foreach (var item in Model){
+    <tr style="color:Tomato;">
+        <td>
+        @Html.DisplayFor(ModelItem => item.ProductName)   
+        </td>
+       <td>
+        @Html.DisplayFor(ModelItem => item.UpdatedAt)
+        </td>
+       <td>
+        @Html.DisplayFor(ModelItem => item.Description)
+        </td>
+    </tr>
+}
+</table>
+<div>
+    <a href="">see..more</a>
+</div>
+<!--@foreach (var item in ViewBag.AllOrders)
+    {
+    <tr style="color: blue;">
+        <td>@item.Products.ProductName ProductId's:@item.ProductId</td>
+        <td>@item.Products.UpdatedAt</td>
+        <td>@item.Users.FirstName UserId:@item.UserId</td>
+        <td>@item.Products.Creator.FirstName CreatorId:@item.Products.Creator.UserId</td>
+    </tr>
+    }-->

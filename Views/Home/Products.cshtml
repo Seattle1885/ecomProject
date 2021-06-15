@@ -1,0 +1,84 @@
+@model Product
+<h1>@ViewBag.LoginUser.FirstName Welcome to Products </h1>
+
+<div class="flex-container">
+    <div class="d-inline-flex p-2">
+        <form asp-action="ProductProcess" asp-controller="Home" method="POST" enctype="multipart/form-data">
+            <h3>Add a Product</h3>
+
+            <div class="form-group row">
+                <span class="alert-danger" asp-validation-for="ProductName"></span>
+                <label class="col-sm-8 col-form-label" asp-for="ProductName">Name:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" asp-for="ProductName" placeholder="Enter Product Name" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" asp-for="Description">Description:</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" asp-for="Description" placeholder="Enter Description"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-5 col-form-label" asp-for="Quantity">Initial Quantity</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" asp-for="Quantity" placeholde="Qunatity Here" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-auto my-1">
+                    <label class="mr-sm-2" for="inlineFormCustomSelect">Indoor/OutDoor</label>
+                    <select class="custom-select mr-sm-2">
+                        <option selected>Choose...</option>
+                        <option value="1">Indoor</option>
+                        <option value="2">Outdoor</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="submit" value="Create" class="btn btn-success" />
+        </form>
+        
+        <div>
+            <span class="alert-danger" asp-validation-for="Description"></span>
+            <span class="alert-danger" asp-validation-for="Quantity"></span>
+        </div>
+
+    </div>
+
+    <div class="inline-flex justify-content-end">
+        @foreach (var item in ViewBag.AllProducts)
+        {
+        <div class="card-group">
+            <!--<img> place image here-->
+            <div class="card" style="width: 200px">
+                <div class="card-body">
+                    <h4 class="card-title">@item.ProductName</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Quantity @item.Quantity</h6>
+                    <p class="card-text">@item.Description</p>
+                    
+                    <div>
+                        @if (@item.Quantity == 0 )
+                        {
+                        <div><a>Currently Unavailable, Sorry</a></div> 
+                        }
+                        else
+                        {
+                        <a href="purchase/@item.ProductId" class="btn btn-primary">Purchase</a>
+                        }
+                        @if (ViewBag.LoginUser == item.Creator)
+                        {
+                        <a href="delete/@item.ProductId" value="@item.Creator" class="btn btn-danger">Delete</a>
+                        <a href="editPage/@item.ProductId" value="@item.Creator" class="btn btn-warning">Edit</a>                        
+                        }
+                    </div> 
+                </div>
+            </div>
+        </div><br>
+        }
+    </div>
+
+</div>

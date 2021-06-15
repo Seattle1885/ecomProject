@@ -1,0 +1,30 @@
+@model LUser
+
+<div class="d-inline-flex p-2" >
+    <form asp-action="LoginProcess" asp-controller="Home" method="GET">
+        <div>
+            <h3 class="text-center">Login</h3>
+
+            <div class="form-group row">
+                <!--<span class="alert-danger" asp-validation-for="LEmail"></span>-->
+                <label class="col-sm-4 col-form-label" asp-for="LEmail">Email:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="LEmail" placeholder="Enter Email" value="sm@gmail.com"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <!--<span class="alert-danger" asp-validation-for="LPassword"></span>-->
+                <label class="col-sm-4 col-form-label" asp-for="LPassword">Password:</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="LPassword" placeholder="Enter Password" value="Zxc123456"/>
+                </div>
+            </div>                       
+        </div>
+        <input type="submit" class="btn btn-success">
+    </form>
+</div>
+<div>
+    <span class="alert-danger, span" asp-validation-for="LEmail"></span><br>
+    <span class="alert-danger, span" asp-validation-for="LPassword"></span>
+</div>
